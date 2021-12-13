@@ -1,7 +1,6 @@
 GOOGLE_DRIVE_PATH = './'
 
 import numpy as np
-import pandas as pd
 import torch
 from tqdm import trange
 import torch.nn as nn
@@ -43,7 +42,7 @@ from two_stage_detector import TwoStageDetector
 # This is the best saved network
 weights_path = os.path.join(GOOGLE_DRIVE_PATH, "frcnn_detector_0.67844.pt")
 frcnn_detector = TwoStageDetector(num_classes=3).to(dtype=torch.float32, device=dev)
-frcnn_detector.load_state_dict(torch.load(weights_path))
+frcnn_detector.load_state_dict(torch.load(weights_path, map_location=torch.device(dev)))
 frcnn_detector.eval()
 
 # Load filenames for testing data
